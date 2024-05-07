@@ -38,7 +38,7 @@ def myNetwork():
                              channel='1', mode='g', position='824.0,454.0,0')
 
     info( '*** Add hosts/stations\n')
-    h1 = net.addHost('h1', cls=Host, ip='10.0.0.1', defaultRoute=None)
+    h1 = net.addHost('h1', cls=Host, ip='10.0.0.9', defaultRoute=None)
     sta1 = net.addStation('sta1', ip='10.0.0.1',
                            position='35.0,577.0,0')
     sta2 = net.addStation('sta2', ip='10.0.0.2',
