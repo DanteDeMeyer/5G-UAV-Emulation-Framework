@@ -5,10 +5,10 @@ import org.onosproject.net.meter.MeterId;
 
 import java.util.Set;
 
-public class ID_Meter{
+public class MeterId{
 
 
-    public ID_Meter (){ }
+    public MeterId (){ }
 
     public static MeterId buildMeterId(MeterId meterId, PortNumber outputport){
 

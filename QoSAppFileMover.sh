@@ -4,7 +4,7 @@
 qos_slicing_dir="/home/dante/QoS-Slicing/ONOS File"
 
 # Root directory of the ONOS source code
-onos_dir="/home/dante/5G-UAV-Emulation-Framework/onos"
+onos_dir="/home/dante/onos"
 
 # Backup directory for ONOS files
 backup_dir="home/dante/onos-backupp"
