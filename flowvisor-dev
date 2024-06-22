@@ -1,0 +1,24 @@
+# Use CentOS 6 as the base image
+FROM centos:6
+
+# Add EOL repository configurations to ensure the package manager remains functional
+COPY ./CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
+ADD https://www.getpagespeed.com/files/centos6-eol.repo /etc/yum.repos.d/CentOS-Base.repo
+ADD https://www.getpagespeed.com/files/centos6-epel-eol.repo /etc/yum.repos.d/epel.repo
+
+# Install necessary packages
+RUN yum update -y && \
+    yum install -y wget git sudo nano ant java-1.6.0-openjdk-devel && \
+    yum clean all
+
+# Clone the FlowVisor repository
+RUN git clone https://github.com/OPENNETWORKINGLAB/flowvisor.git /opt/flowvisor
+# Set the working directory to /opt/flowvisor
+WORKDIR /opt/flowvisor
+RUN make
+RUN useradd -r -m -d /home/flowvisor -s /bin/bash flowvisor
+RUN usermod -a -G flowvisor flowvisor
+RUN sudo make fvuser=flowvisor fvgroup=flowvisor install
+
+# Set the default command or entry point to Bash
+ENTRYPOINT ["/bin/bash", "-l", "-c"]

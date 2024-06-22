@@ -1,0 +1,25 @@
+# About: Image for FlowVisor: A transparent proxy between OpenFlow switches and multiple OpenFlow controllers
+# Ref  : https://github.com/fernnf/vsdnemul
+#
+# WARN : The last commit for FlowVisor is on Aug 31, 2013... The chosen of this old software is due to lacking of alternative.
+
+FROM centos:6.10
+
+# Enable CentOS Vault repositories
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Base.repo && \
+    sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/CentOS-Base.repo && \
+    sed -i 's/mirror.centos.org/vault.centos.org/g' /etc/yum.repos.d/CentOS-Base.repo
+
+# Install necessary packages without GPG checks
+RUN yum update --nogpgcheck -y && \
+    yum install --nogpgcheck -y wget sudo nano git java-1.6.0-openjdk-devel ant gcc gcc-c++ make
+
+# Create flowvisor user and group
+RUN groupadd -r flowvisor && useradd -r -g flowvisor flowvisor
+
+RUN git clone https://github.com/opennetworkinglab/flowvisor.git
+ENV TERM=vt100
+ENV HOME /root
+ENV BUILD_NUMBER docker
+
+CMD ["bash"]
