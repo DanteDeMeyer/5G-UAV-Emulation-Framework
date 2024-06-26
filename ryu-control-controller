@@ -1,0 +1,20 @@
+# Use the official Python image as a base
+FROM python:3.8
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY requirements.txt .
+
+# Install the required Python packages
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the current directory contents into the container
+COPY drone_video_streaming.py .
+
+# Expose the port on which the Ryu controller will run
+EXPOSE 20001
+
+# Command to run the Ryu controller
+CMD ["ryu-manager", "--ofp-tcp-listen-port", "20001", "drone_video_streaming.py"]

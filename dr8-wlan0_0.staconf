@@ -1,0 +1,9 @@
+ctrl_interface=/var/run/wpa_supplicant
+network={
+   ssid="ap4-ssid"
+   psk="123456789a"
+   proto=WPA2
+   pairwise=CCMP
+   key_mgmt=WPA-PSK
+   bgscan="simple:0:-60:10"
+}
